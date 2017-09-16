@@ -5,11 +5,11 @@ import { Provider } from 'react-redux'
 
 import configureStore from './app/store/configure_store'
 
-import TestPage from './app/pages/test_page'
+import GenerationSelect from './app/pages/generation_select'
 import PokemonSelect from './app/pages/pokemon_select'
 
 const Navigator = StackNavigator({
-  Home: { screen: TestPage },
+  Home: { screen: GenerationSelect },
   PokemonSelect: { screen: PokemonSelect }
 })
 

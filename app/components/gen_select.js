@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Button, TouchableHighlight, TouchableOpacity } from 'react-native'
 
 export class GenSelect extends React.Component {
   constructor(props) {
@@ -10,11 +10,11 @@ export class GenSelect extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.onGenSelect(1)}>
-          <Text style={styles.button}>Gen 1</Text>
+        <TouchableOpacity style={styles.button} onPress={() => this.props.onGenSelect(1)}>
+          <Text style={styles.text}>Gen 1</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.onGenSelect(2)}>
-          <Text style={styles.button}>Gen 2</Text>
+        <TouchableOpacity style={styles.button} onPress={() => this.props.onGenSelect(2)}>
+            <Text style={styles.text}>Gen 2</Text>
         </TouchableOpacity>
       </View>
     )
@@ -24,12 +24,18 @@ export class GenSelect extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignSelf: 'stretch',
   },
   button: {
-    fontWeight: 'bold',
-    textAlign: 'center',
+    flex: 1,
+    backgroundColor: 'skyblue',
     borderColor: '#000',
     borderWidth: 2,
-    margin: 5
+    margin: 5,
+    justifyContent: 'center'
+  },
+  text: {
+    fontWeight: 'bold',
+    textAlign: 'center',
   }
 })
