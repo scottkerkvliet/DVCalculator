@@ -25,14 +25,19 @@ class TestPage extends React.Component {
   }
 
   inputGeneration(generation) {
-    this.props.onGenSubmitted(generation)    
+    this.props.onGenSubmitted(generation)
   }
 
   render() {
+    const { navigate } = this.props.navigation
+
     return (
       <View style={styles.container}>
         <GenSelect onGenSelect={(gen) => this.inputGeneration(gen)}/>
         <Text>{this.props.generation}</Text>
+        <Button
+          title={"Go to Pokemon Select"}
+          onPress={() => navigate('PokemonSelect')}/>
       </View>
     )
   }
@@ -71,5 +76,4 @@ const actions = (dispatch) => {
   }
 }
 
-//export default connect(select, actions)(TestPage)
-export default TestPage
+export default connect(select, actions)(TestPage)
