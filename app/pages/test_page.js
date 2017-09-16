@@ -5,6 +5,10 @@ import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 import { input_stats_gen_1, input_stats_gen_2 } from '../actions/input'
 
 class TestPage extends React.Component {
+  static navigationOptions = {
+    title: "Test Page"
+  }
+
   constructor(props) {
     super(props)
     this.state = { text: null }
@@ -66,4 +70,5 @@ const actions = (dispatch) => {
   }
 }
 
-export default connect(select, actions)(TestPage)
+//export default connect(select, actions)(TestPage)
+export default TestPage
