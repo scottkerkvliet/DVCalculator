@@ -71,5 +71,4 @@ const actions = (dispatch) => {
   }
 }
 
-//export default connect(select, actions)(TestPage)
-export default TestPage
+export default connect(select, actions)(TestPage)
