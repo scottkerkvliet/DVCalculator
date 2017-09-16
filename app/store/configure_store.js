@@ -1,5 +1,8 @@
 import { configureStore, combineReducers } from 'redux'
 import input_stats from '../reducers/input_stats'
+import dv_ranges from '../reducers/dv_ranges'
+import pokemon from '../reducers/pokemon'
+import selections from '../reducers/selections'
 import generation1 from '../common/generation1'
 import generation2 from '../common/generation2'
 
@@ -32,5 +35,5 @@ let initial_state = {
 }
 
 export default () => {
-  createStore(combineReducers({ input_stats }), initial_state)
+  createStore(combineReducers({ input_stats, dv_ranges, pokemon, selections }), initial_state)
 }
