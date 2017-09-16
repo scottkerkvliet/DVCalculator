@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from 'redux'
-import dv_calculator from '../reducers/dv_calculator'
+import input_stats from '../reducers/input_stats'
 
 let initial_state = {
   pokemon: null,
@@ -24,5 +24,5 @@ let initial_state = {
 }
 
 export default () => {
-  createStore(combineReducers({ dv_calculator }), initial_state)
+  createStore(combineReducers({ input_stats }), initial_state)
 }
