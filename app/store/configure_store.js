@@ -16,7 +16,7 @@ let initial_state = {
     speed: null,
     hp: null
   },
-  input: {
+  input_stats: {
     attack: null,
     defense: null,
     special: null,
