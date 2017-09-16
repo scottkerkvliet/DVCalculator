@@ -15,15 +15,6 @@ class TestPage extends React.Component {
     this.state = { text: null }
   }
 
-  inputStats() {
-    if (this.props.generation === 1) {
-      this.props.onGen1InputSubmitted(this.state.text)
-    }
-    else {
-      this.props.onGen2InputSubmitted(this.state.text)
-    }
-  }
-
   inputGeneration(generation) {
     this.props.onGenSubmitted(generation)
   }
@@ -63,15 +54,12 @@ let text = 'Not Pressed'
 
 const select = (store) => {
   return {
-    hp: store.input_stats.hp,
     generation: store.selections.generation
   }
 }
 
 const actions = (dispatch) => {
   return {
-    onGen1InputSubmitted: (hp) => { dispatch(input_stats_gen_1(0, hp)) },
-    onGen2InputSubmitted: (hp) => { dispatch(input_stats_gen_2(0, hp)) },
     onGenSubmitted: (generation) => { dispatch(input_generation(generation)) }
   }
 }
