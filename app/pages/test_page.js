@@ -6,6 +6,10 @@ import { input_stats_gen_1, input_stats_gen_2, input_generation } from '../actio
 import { GenSelect } from '../components/gen_select'
 
 class TestPage extends React.Component {
+  static navigationOptions = {
+    title: "Test Page"
+  }
+
   constructor(props) {
     super(props)
     this.state = { text: null }
@@ -67,4 +71,5 @@ const actions = (dispatch) => {
   }
 }
 
-export default connect(select, actions)(TestPage)
+//export default connect(select, actions)(TestPage)
+export default TestPage
