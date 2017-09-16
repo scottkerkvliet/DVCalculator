@@ -32,7 +32,7 @@ class StatInput extends React.Component {
 const select = (store) => {
   return {
     pokemon_id: store.selections.pokemon_id,
-    pokemon: store.pokemon, 
+    pokemon: store.pokemon,
     generation: store.selections.generation
   }
 }

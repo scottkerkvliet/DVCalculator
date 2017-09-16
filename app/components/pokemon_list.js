@@ -27,10 +27,14 @@ const styles = StyleSheet.create({
 class PokemonListItem extends React.PureComponent {
   render() {
     return (
-      <TouchableHighlight style={styles.list_item_highlight} underlayColor='#ccc' onPress={() => null}>
+      <TouchableHighlight style={styles.list_item_highlight} underlayColor='#ccc' onPress={() => this.onPressTouchableHighlight()}>
         <Text style={styles.list_item_text}>{this.props.text}</Text>
       </TouchableHighlight>
     )
+  }
+
+  onPressTouchableHighlight() {
+    this.props.onPokemonSelected(this.props.number)
   }
 }
 
@@ -43,14 +47,17 @@ export default class PokemonList extends React.Component {
         <FlatList
           data={this.props.pokemon}
           keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem} />
+          renderItem={(item) => this.renderItem(item)} />
       </View>
     )
   }
 
   renderItem({ item }) {
     return (
-      <PokemonListItem text={"#" + item.number + ": " + item.name} />
+      <PokemonListItem
+        text={"#" + item.number + ": " + item.name}
+        number={item.number}
+        onPokemonSelected={this.props.onPokemonSelected} />
     )
   }
 
