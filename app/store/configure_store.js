@@ -1,8 +1,13 @@
 import { configureStore, combineReducers } from 'redux'
 import input_stats from '../reducers/input_stats'
+import generation1 from '../common/generation1'
+import generation2 from '../common/generation2'
 
 let initial_state = {
-  pokemon: null,
+  pokemon: {
+    1: generation1,
+    2: generation2
+  },
   generation: null,
   dv_ranges: {
     attack: null,
@@ -11,7 +16,7 @@ let initial_state = {
     speed: null,
     hp: null
   },
-  input: {
+  input_stats: {
     attack: null,
     defense: null,
     special: null,
