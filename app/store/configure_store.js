@@ -35,5 +35,5 @@ let initial_state = {
 }
 
 export default () => {
-  createStore(combineReducers({ input_stats, dv_ranges, pokemon, selections }), initial_state)
+  return createStore(combineReducers({ input_stats, dv_ranges, pokemon, selections }), initial_state)
 }
