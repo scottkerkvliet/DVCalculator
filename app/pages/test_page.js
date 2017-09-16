@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Text, TextInput, View, Button } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 
-import { input_stats_gen1 } from '../actions/input'
+import { input_stats_gen_1, input_stats_gen_2 } from '../actions/input'
 
 class TestPage extends React.Component {
   constructor(props) {
@@ -20,17 +20,37 @@ class TestPage extends React.Component {
   }
 
   render() {
-    <View>
-      <Text>{this.props.hp}</Text>
-      <TextInput
-        onChangeText={(text) => { this.setState({ text }) }}
-        value={this.state.text} />
-      <Button
-        title="Submit",
-        onPress={this.inputStats()} />
-    </View>
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.text_input}
+          onChangeText={(text) => { this.setState({ text }) }}
+          value={this.state.text} />
+        <Button
+          title="Submit"
+          onPress={() => { this.inputStats() }} />
+        <Text>{"Hello world!"}</Text>
+        <Text>{this.props.hp}</Text>
+      </View>
+    )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text_input: {
+    textAlign: 'center',
+    height: 40,
+    borderColor: '#000',
+    borderWidth: 1,
+    width: 100
+  }
+})
 
 const select = (store) => {
   return {
@@ -41,8 +61,8 @@ const select = (store) => {
 
 const actions = (dispatch) => {
   return {
-    onGen1InputSubmitted: (hp) => { dispatch(input_stats_gen1(hp)) },
-    onGen2InputSubmitted: (hp) => { dispatch(input_stats_gen2(hp)) }
+    onGen1InputSubmitted: (hp) => { dispatch(input_stats_gen_1(0, hp)) },
+    onGen2InputSubmitted: (hp) => { dispatch(input_stats_gen_2(0, hp)) }
   }
 }
 
