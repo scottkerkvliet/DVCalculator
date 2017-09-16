@@ -10,7 +10,7 @@ import PokemonSelect from './app/pages/pokemon_select'
 import StatInput from './app/pages/stat_input'
 
 const Navigator = StackNavigator({
-  Home: { screen: GenerationSelect },
+  GenerationSelect: { screen: GenerationSelect },
   PokemonSelect: { screen: PokemonSelect },
   StatInput: { screen: StatInput }
 })

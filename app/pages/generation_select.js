@@ -5,9 +5,25 @@ import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 import { input_stats_gen_1, input_stats_gen_2, input_generation } from '../actions/input'
 import { GenSelect } from '../components/gen_select'
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text_input: {
+    textAlign: 'center',
+    height: 40,
+    borderColor: '#000',
+    borderWidth: 1,
+    width: 100
+  }
+})
+
 class GenerationSelect extends React.Component {
   static navigationOptions = {
-    title: "Generation Select"
+    title: 'Generation Select'
   }
 
   constructor(props) {
@@ -30,22 +46,6 @@ class GenerationSelect extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text_input: {
-    textAlign: 'center',
-    height: 40,
-    borderColor: '#000',
-    borderWidth: 1,
-    width: 100
-  }
-})
 
 const select = (store) => {
   return {
