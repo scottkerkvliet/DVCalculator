@@ -1,6 +1,7 @@
 export default {
   63: {
     name: "Abra",
+    number: 63,
     hp: 25,
     attack: 20,
     defense: 15,
@@ -10,6 +11,7 @@ export default {
   },
   132: {
     name: "Ditto",
+    number: 132,
     hp: 48,
     attack: 48,
     defense: 48,
@@ -19,6 +21,7 @@ export default {
   },
   158: {
     name: "Totodile",
+    number: 158,
     hp: 50,
     attack: 65,
     defense: 64,

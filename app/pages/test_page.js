@@ -24,6 +24,8 @@ class TestPage extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation
+
     return (
       <View style={styles.container}>
         <TextInput
@@ -35,6 +37,9 @@ class TestPage extends React.Component {
           onPress={() => { this.inputStats() }} />
         <Text>{"Hello world!"}</Text>
         <Text>{this.props.hp}</Text>
+        <Button
+          title={"Go to Pokemon Select"}
+          onPress={() => navigate('PokemonSelect')}/>
       </View>
     )
   }
@@ -70,5 +75,4 @@ const actions = (dispatch) => {
   }
 }
 
-//export default connect(select, actions)(TestPage)
-export default TestPage
+export default connect(select, actions)(TestPage)
