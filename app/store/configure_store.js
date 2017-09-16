@@ -1,8 +1,13 @@
 import { configureStore, combineReducers } from 'redux'
 import dv_calculator from '../reducers/dv_calculator'
+import generation1 from '../common/generation1'
+import generation2 from '../common/generation2'
 
 let initial_state = {
-  pokemon: null,
+  pokemon: {
+    1: generation1,
+    2: generation2
+  },
   generation: null,
   dv_ranges: {
     attack: null,
