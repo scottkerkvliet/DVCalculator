@@ -4,7 +4,7 @@ import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 
 import { input_stats_gen_1, input_stats_gen_2, input_generation } from '../actions/input'
 
-class GenerationSelect extends React.Component {
+class StatInput extends React.Component {
   static navigationOptions = {
     title: "Please input stats"
   }
@@ -26,7 +26,7 @@ class GenerationSelect extends React.Component {
 const select = (store) => {
   return {
     pokemon_id: store.selections.pokemon_id,
-    pokemon: store.pokemon, 
+    pokemon: store.pokemon,
     generation: store.selections.generation
   }
 }
