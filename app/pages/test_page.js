@@ -40,13 +40,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text_input: {
-    textAlign: 'center',
-    height: 40,
-    borderColor: '#000',
-    borderWidth: 1,
-    width: 100
   }
 })
 
