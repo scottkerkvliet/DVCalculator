@@ -1,4 +1,15 @@
-export const input_stats = (state, action) => {
+let default_state = {
+  previous_levels_submitted: [],
+  attack: null,
+  defense: null,
+  special: null,
+  special_attack: null,
+  special_defense: null,
+  speed: null,
+  hp: null
+}
+
+export const input_stats = (state = default_state, action) => {
   switch(action.type) {
     case 'SET_INPUT_STATS_GEN_1':
       return {
