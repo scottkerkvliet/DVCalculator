@@ -8,7 +8,10 @@ let initial_state = {
     1: generation1,
     2: generation2
   },
-  generation: null,
+  selections: {
+    pokemon_id: null,
+    generation: null
+  },
   dv_ranges: {
     attack: null,
     defense: null,
@@ -17,6 +20,7 @@ let initial_state = {
     hp: null
   },
   input_stats: {
+    previous_levels_submitted: [],
     attack: null,
     defense: null,
     special: null,
@@ -24,8 +28,7 @@ let initial_state = {
     special_defense: null,
     speed: null,
     hp: null
-  },
-  previous_levels_submitted: []
+  }
 }
 
 export default () => {
