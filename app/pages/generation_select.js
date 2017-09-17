@@ -28,7 +28,6 @@ class GenerationSelect extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { text: null }
   }
 
   inputGeneration(generation) {

@@ -1,56 +1,191 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View, Button, TouchableHighlight, TouchableOpacity } from 'react-native'
 
+import { InputField } from './input_field'
+
 const styles = StyleSheet.create({
-  container: {
+  levelContainer: {
+    height: 80,
+    width: 100,
+    alignSelf: 'center'
+  },
+  statsContainer: {
+    height: 100,
     flexDirection: 'row',
-    flex: 1,
     alignSelf: 'stretch',
   },
-  column: {
-    flexDirection: 'column',
-    flex: 1
+  buttonContainer: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    alignItems: 'center'
   },
-  text: {
-    textAlign: 'center'
-  },
-  input: {
+  button: {
+    flex: 1,
+    alignSelf: 'stretch',
+    marginLeft: 20,
+    marginRight: 20
   }
 })
-
 
 export class StatInputFields extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { text: null }
+    this.state = {  level: '',
+                    hp: '',
+                    attack: '',
+                    defense: '',
+                    speed: '',
+                    special: '',
+                    special_attack: '',
+                    special_defense: '' }
+  }
+
+  submitStats() {
+    if (this.props.generation === 1) {
+      this.props.onSubmitGen1(this.state.level, this.state.hp, this.state.attack, this.state.defense,
+        this.state.speed, this.state.special)
+    } else if (this.props.generation === 2) {
+      this.props.onSubmitGen2(this.state.level, this.state.hp, this.state.attack, this.state.defense,
+        this.state.special_attack, this.state.special_defense, this.state.speed)
+    }
+  }
+
+  submitDisabled() {
+    if (this.props.generation === 1) {
+      return !( this.state.level.length &&
+                this.state.hp.length &&
+                this.state.attack.length &&
+                this.state.defense.length &&
+                this.state.speed.length &&
+                this.state.special.length)
+    } else if (this.props.generation === 2) {
+      return !( this.state.level.length &&
+                this.state.hp.length &&
+                this.state.attack.length &&
+                this.state.defense.length &&
+                this.state.speed.length &&
+                this.state.special_attack.length &&
+                this.state.special_defense.length)
+    }
+  }
+
+  reset() {
+    this.refs['Level'].clearText()
+    this.refs['HP'].clearText()
+    this.refs['Attack'].clearText()
+    this.refs['Defense'].clearText()
+    this.refs['Speed'].clearText()
+    if (this.props.generation === 1) {
+      this.refs['Special'].clearText()
+    } else if (this.props.generation === 2) {
+      this.refs['Spc_Atk'].clearText()
+      this.refs['Spc_Def'].clearText()
+    }
+
+    this.state.level = ''
+    this.state.hp = ''
+    this.state.attack = ''
+    this.state.defense = ''
+    this.state.speed = ''
+    this.state.special = ''
+    this.state.special_attack = ''
+    this.state.special_defense = ''
+
+    this.props.onReset()
+  }
+
+  selectNext(title) {
+    switch(title) {
+      case 'Level':
+        this.refs['HP'].getFocus()
+        break
+      case 'HP':
+        this.refs['Attack'].getFocus()
+        break
+      case 'Attack':
+        this.refs['Defense'].getFocus()
+        break
+      case 'Defense':
+        if (this.props.generation === 1) {
+          this.refs['Speed'].getFocus()
+        } else {
+          this.refs['Spc_Atk'].getFocus()
+        }
+        break
+      case 'Speed':
+        if (this.props.generation === 1) {
+          this.refs['Special'].getFocus()
+        }
+        break
+      case 'Special':
+        break
+      case 'Spc_Atk':
+        this.refs['Spc_Def'].getFocus()
+        break
+      case 'Spc_Def':
+        break
+      default:
+        break
+    }
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.column}>
-          <Text style={styles.text}>Level</Text>
-          <TextInput keyboardType='numeric' selectTextOnFocus={true} returnKeyType='next' style={styles.input}/>
+      <View>
+        <View style={styles.levelContainer}>
+          <InputField
+            onChange={(value) => this.setState({ level: value })}
+            onSubmit={(title) => this.selectNext(title)}
+            title='Level'
+            ref='Level' />
         </View>
-        <View style={styles.column}>
-          <Text style={styles.text}>HP</Text>
-          <TextInput keyboardType='numeric' selectTextOnFocus={true} returnKeyType='next' style={styles.input}/>
+        <View style={styles.statsContainer}>
+          <InputField
+            onChange={(value) => this.setState({ hp: value })}
+            onSubmit={(title) => this.selectNext(title)}
+            title='HP'
+            ref='HP' />
+          <InputField
+            onChange={(value) => this.setState({ attack: value })}
+            onSubmit={(title) => this.selectNext(title)}
+            title='Attack'
+            ref='Attack' />
+          <InputField
+            onChange={(value) => this.setState({ defense: value })}
+            onSubmit={(title) => this.selectNext(title)}
+            title='Defense'
+            ref='Defense' />
+          {this.props.generation === 2 ?
+            [<InputField
+              onChange={(value) => this.setState({ special_attack: value })}
+              onSubmit={(title) => this.selectNext(title)}
+              title='Spc Atk' key='Spc Atk'
+              ref='Spc_Atk' />,
+            <InputField
+              onChange={(value) => this.setState({ special_defense: value })}
+              onSubmit={(title) => this.selectNext(title)}
+              title='Spc Def' key='Spc Def' ref='Spc_Def' />,
+            <InputField
+              onChange={(value) => this.setState({ speed: value })}
+              onSubmit={(title) => this.selectNext(title)}
+              title='Speed' key='Speed' ref='Speed' />]
+            :
+            [<InputField
+              onChange={(value) => this.setState({ speed: value })}
+              onSubmit={(title) => this.selectNext(title)}
+              title='Speed' key='Speed' ref='Speed' />,
+            <InputField
+              onChange={(value) => this.setState({ special: value })}
+              onSubmit={(title) => this.selectNext(title)}
+              title='Special' key='Special' ref='Special' />]
+          }
         </View>
-        <View style={styles.column}>
-          <Text style={styles.text}>Attack</Text>
-          <TextInput keyboardType='numeric' selectTextOnFocus={true} returnKeyType='next' style={styles.input}/>
-        </View>
-        <View style={styles.column}>
-          <Text style={styles.text}>Defense</Text>
-          <TextInput keyboardType='numeric' selectTextOnFocus={true} returnKeyType='next' style={styles.input}/>
-        </View>
-        <View style={styles.column}>
-          <Text style={styles.text}>Speed</Text>
-          <TextInput keyboardType='numeric' selectTextOnFocus={true} returnKeyType='next' style={styles.input}/>
-        </View>
-        <View style={styles.column}>
-          <Text style={styles.text}>Special</Text>
-          <TextInput keyboardType='numeric' selectTextOnFocus={true} returnKeyType='next' style={styles.input}/>
+        <View style={styles.buttonContainer}>
+          <Button title='Submit'
+            style={styles.button}
+            onPress={() => this.submitStats()}
+            disabled={this.submitDisabled()}/>
+          <Button title='Reset' style={styles.button} onPress={() => this.reset()}/>
         </View>
       </View>
     )
