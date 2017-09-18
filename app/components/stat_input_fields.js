@@ -109,7 +109,7 @@ export class StatInputFields extends React.Component {
         if (this.props.generation === 1) {
           this.refs['Speed'].getFocus()
         } else {
-          this.refs['Spc_Atk'].getFocus()
+          this.refs['Spc Atk'].getFocus()
         }
         break
       case 'Speed':
@@ -119,10 +119,11 @@ export class StatInputFields extends React.Component {
         break
       case 'Special':
         break
-      case 'Spc_Atk':
-        this.refs['Spc_Def'].getFocus()
+      case 'Spc Atk':
+        this.refs['Spc Def'].getFocus()
         break
-      case 'Spc_Def':
+      case 'Spc Def':
+        this.refs['Speed'].getFocus()
         break
       default:
         break
@@ -158,13 +159,12 @@ export class StatInputFields extends React.Component {
           {this.props.generation === 2 ?
             [<InputField
               onChange={(value) => this.setState({ special_attack: value })}
-              onSubmit={(title) => this.selectNext(title)}
-              title='Spc Atk' key='Spc Atk'
-              ref='Spc_Atk' />,
+              onSubmit={(ref) => this.selectNext(ref)}
+              title='Spc Atk' key='Spc Atk' ref='Spc Atk' />,
             <InputField
               onChange={(value) => this.setState({ special_defense: value })}
               onSubmit={(title) => this.selectNext(title)}
-              title='Spc Def' key='Spc Def' ref='Spc_Def' />,
+              title='Spc Def' key='Spc Def' ref='Spc Def' />,
             <InputField
               onChange={(value) => this.setState({ speed: value })}
               onSubmit={(title) => this.selectNext(title)}
