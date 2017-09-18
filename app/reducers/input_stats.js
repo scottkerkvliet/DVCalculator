@@ -1,5 +1,6 @@
 let default_state = {
   previous_levels_submitted: [],
+  level: null,
   attack: null,
   defense: null,
   special: null,
@@ -19,8 +20,7 @@ export const input_stats = (state = default_state, action) => {
         defense: action.defense,
         speed: action.speed,
         special: action.special,
-
-        previous_levels_submitted: state.previous_levels_submitted.concat([action.level])
+        level: action.level
       }
     case 'SET_INPUT_STATS_GEN_2':
       return {
@@ -31,19 +31,14 @@ export const input_stats = (state = default_state, action) => {
         speed: action.speed,
         special_attack: action.special_attack,
         special_defense: action.special_defense,
-
-        previous_levels_submitted: state.previous_levels_submitted.concat([action.level])
+        level: action.level,
       }
     case 'RESET_STATS':
+      return default_state
+    case 'CONFIRM_VALID_INPUT':
       return {
-        hp: null,
-        attack: null,
-        defense: null,
-        speed: null,
-        special: null,
-        special_attack: null,
-        special_defense: null,
-        previous_levels_submitted: []
+        ...default_state,
+        previous_levels_submitted: state.previous_levels_submitted.concat([action.level])
       }
     default:
       return state

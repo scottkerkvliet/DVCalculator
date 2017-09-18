@@ -4,11 +4,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import Images from '../common/images'
 
 export class GenSelect extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { text: null }
-  }
-
   render() {
     return (
       <View style={styles.container}>
