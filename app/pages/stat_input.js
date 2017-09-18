@@ -30,7 +30,11 @@ class StatInput extends React.Component {
   }
 
   submitStatsGen2(level, hp, attack, defense, special_attack, special_defense, speed) {
-    this.props.onGen1StatsSubmitted(level, hp, attack, defense, special_attack, special_defense, speed)
+    if (this.props.input_stats.previous_levels_submitted.includes(level)) {
+      Alert.alert('Did not update DVs', 'Level has already been submitted')
+    } else {
+      this.props.onGen2StatsSubmitted(level, hp, attack, defense, special_attack, special_defense, speed)
+    }
   }
 
   submitDvRange(hpRange, attackRange, defenseRange, speedRange, specialRange) {
