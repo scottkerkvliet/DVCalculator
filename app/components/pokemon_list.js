@@ -12,12 +12,6 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
   },
-  title: {
-    fontSize: 20,
-    paddingTop: 15,
-    paddingBottom: 10,
-    paddingLeft: 10
-  },
   container: {
     display: 'flex',
     flex: 1
@@ -43,7 +37,6 @@ export default class PokemonList extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Select a Pokemon:</Text>
         <FlatList
           data={this.props.pokemon}
           keyExtractor={this.keyExtractor}
