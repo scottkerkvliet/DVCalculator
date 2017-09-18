@@ -7,7 +7,7 @@ import { input_pokemon_id } from '../actions/input'
 
 class PokemonSelect extends React.Component {
   static navigationOptions = {
-    title: "Pokemon Selection"
+    title: "Pokemon Select"
   }
 
   render() {
