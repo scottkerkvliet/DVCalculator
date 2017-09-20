@@ -8,15 +8,6 @@ export class DvCalculator extends React.Component {
     this.state = { hpRange: null, attackRange: null, defenseRange: null, speedRange: null, specialRange: null }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    for (var key in this.props.input_stats) {
-      if (this.props.input_stats[key] != nextProps.input_stats[key]) {
-        return true
-      }
-    }
-    return false
-  }
-
   getRange(name, stat, baseStat) {
     var multiplier = this.props.input_stats.level / 50
     var min = 15
