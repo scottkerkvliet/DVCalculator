@@ -22,13 +22,13 @@ class PokemonListItem extends React.PureComponent {
   render() {
     return (
       <TouchableHighlight style={styles.list_item_highlight} underlayColor='#ccc' onPress={() => this.onPressTouchableHighlight()}>
-        <Text style={styles.list_item_text}>{this.props.text}</Text>
+        <Text style={styles.list_item_text}>{"#" + this.props.number + ": " + this.props.name}</Text>
       </TouchableHighlight>
     )
   }
 
   onPressTouchableHighlight() {
-    this.props.onPokemonSelected(this.props.number)
+    this.props.onPokemonSelected(this.props.number, this.props.name)
   }
 }
 
@@ -48,7 +48,7 @@ export default class PokemonList extends React.Component {
   renderItem({ item }) {
     return (
       <PokemonListItem
-        text={"#" + item.number + ": " + item.name}
+        name={item.name}
         number={item.number}
         onPokemonSelected={this.props.onPokemonSelected} />
     )

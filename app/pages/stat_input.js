@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
 })
 
 class StatInput extends React.Component {
-  static navigationOptions = {
-    title: 'Please input stats'
-  }
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.title}`
+  })
 
   constructor(props) {
     super(props)
@@ -75,7 +75,6 @@ class StatInput extends React.Component {
           generation={this.props.generation}
           onDvUpdate={(hpRange, attackRange, defenseRange, speedRange, specialRange) => 
             this.submitDvRange(hpRange, attackRange, defenseRange, speedRange, specialRange)}/>
-        <Text>{this.getPokemon().name}</Text>
         <StatInputFields
           generation={this.props.generation}
           onSubmitGen1={(level, hp, attack, defense, speed, special) =>

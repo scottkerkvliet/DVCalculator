@@ -14,7 +14,7 @@ class PokemonSelect extends React.Component {
     return (
       <PokemonList
         pokemon={this.pokemonForCurrentGen()}
-        onPokemonSelected={(number) => this.onPokemonSelected(number)} />
+        onPokemonSelected={(number, name) => this.onPokemonSelected(number, name)} />
     )
   }
 
@@ -24,9 +24,9 @@ class PokemonSelect extends React.Component {
     })
   }
 
-  onPokemonSelected(number) {
+  onPokemonSelected(number, name) {
     this.props.setSelectedPokemon(number)
-    this.props.navigation.navigate('StatInput')
+    this.props.navigation.navigate('StatInput', {title: name})
   }
 }
 
