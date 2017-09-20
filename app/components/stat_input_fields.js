@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button, TouchableHighlight, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 
 import { InputField } from './input_field'
 
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   statsContainer: {
-    height: 100,
+    height: 80,
     flexDirection: 'row',
     alignSelf: 'stretch',
   },

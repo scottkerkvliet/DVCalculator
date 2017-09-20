@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
   input: {
     textAlign: 'center',
     margin: 2,
-    height: 30,
+    height: 34,
     borderWidth: 1,
     borderColor: 'black',
-    backgroundColor: 'grey',
+    backgroundColor: 'lightgrey',
     alignSelf: 'stretch',
   }
 })
@@ -44,6 +44,7 @@ export class InputField extends React.Component {
       <View style={styles.container}>
         <Text style={styles.text}>{this.props.title}</Text>
         <TextInput
+          disableFullscreenUI={true}
           onChangeText={(value) => this.props.onChange(value)}
           onSubmitEditing={() => this.props.onSubmit(this.props.title)}
           keyboardType='numeric'

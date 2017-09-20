@@ -52,6 +52,10 @@ export class DvCalculator extends React.Component {
     return [min, max]
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    this.do_calculation()
+  }
+
   do_calculation() {
     if (!this.props.input_stats.level ||
         !this.props.input_stats.hp ||
@@ -86,7 +90,6 @@ export class DvCalculator extends React.Component {
   }
 
   render() {
-    this.do_calculation()
     return <View></View>
   }
 }

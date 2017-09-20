@@ -5,7 +5,22 @@ import { StyleSheet, Text, TextInput, View, Button, Alert } from 'react-native'
 import { input_stats_gen_1, input_stats_gen_2, reset_stats } from '../actions/input'
 import { update_dv_ranges, confirm_valid_input } from '../actions/calculation'
 import { StatInputFields } from '../components/stat_input_fields'
+import { DvDisplay } from '../components/dv_display'
 import { DvCalculator } from '../components/dv_calculator'
+
+const styles = StyleSheet.create({
+  container: {  
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+  },
+  text: {
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'stretch',
+    textAlign: 'center'
+  }
+})
 
 class StatInput extends React.Component {
   static navigationOptions = {
@@ -68,11 +83,14 @@ class StatInput extends React.Component {
           onSubmitGen2={(level, hp, attack, defense, special_attack, special_defense, speed) =>
             this.submitStatsGen2(level, hp, attack, defense, special_attack, special_defense, speed)}
           onReset={() => this.resetStats()}/>
-        <Text>{this.props.dv_ranges.hpRange? (this.props.dv_ranges.hpRange[0] + ' - ' + this.props.dv_ranges.hpRange[1]) : '0 - 15'}</Text>
-        <Text>{this.props.dv_ranges.attackRange? (this.props.dv_ranges.attackRange[0] + ' - ' + this.props.dv_ranges.attackRange[1]) : '0 - 15'}</Text>
-        <Text>{this.props.dv_ranges.defenseRange? (this.props.dv_ranges.defenseRange[0] + ' - ' + this.props.dv_ranges.defenseRange[1]) : '0 - 15'}</Text>
-        <Text>{this.props.dv_ranges.speedRange? (this.props.dv_ranges.speedRange[0] + ' - ' + this.props.dv_ranges.speedRange[1]) : '0 - 15'}</Text>
-        <Text>{this.props.dv_ranges.specialRange? (this.props.dv_ranges.specialRange[0] + ' - ' + this.props.dv_ranges.specialRange[1]) : '0 - 15'}</Text>
+        <Text style={styles.text}>DVs</Text>
+        <View style={styles.container}>
+          <DvDisplay statRange={this.props.dv_ranges.hpRange} title='HP'/>
+          <DvDisplay statRange={this.props.dv_ranges.attackRange} title='Attack'/>
+          <DvDisplay statRange={this.props.dv_ranges.defenseRange} title='Defense'/>
+          <DvDisplay statRange={this.props.dv_ranges.speedRange} title='Speed'/>
+          <DvDisplay statRange={this.props.dv_ranges.specialRange} title='Special'/>
+        </View>
       </View>
     )
   }
