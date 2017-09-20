@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   container: {  
     flexDirection: 'row',
     alignSelf: 'stretch',
+    marginBottom: 10,
   },
   text: {
     margin: 10,
@@ -67,6 +68,7 @@ class StatInput extends React.Component {
   }
 
   resetStats() {
+    this.refs['inputs'].clearInput()
     this.props.onStatsReset()
   }
 
@@ -85,7 +87,7 @@ class StatInput extends React.Component {
             this.submitStatsGen1(level, hp, attack, defense, speed, special)}
           onSubmitGen2={(level, hp, attack, defense, special_attack, special_defense, speed) =>
             this.submitStatsGen2(level, hp, attack, defense, special_attack, special_defense, speed)}
-          onReset={() => this.resetStats()}/>
+          ref='inputs'/>
         <Text style={styles.text}>DVs</Text>
         <View style={styles.container}>
           <DvDisplay statRange={this.props.dv_ranges.hpRange} title='HP'/>
@@ -93,6 +95,9 @@ class StatInput extends React.Component {
           <DvDisplay statRange={this.props.dv_ranges.defenseRange} title='Defense'/>
           <DvDisplay statRange={this.props.dv_ranges.speedRange} title='Speed'/>
           <DvDisplay statRange={this.props.dv_ranges.specialRange} title='Special'/>
+        </View>
+        <View>
+          <Button title='Reset' onPress={() => this.resetStats()}/>
         </View>
       </View>
     )

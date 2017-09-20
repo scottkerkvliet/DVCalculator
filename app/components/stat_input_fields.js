@@ -69,7 +69,7 @@ export class StatInputFields extends React.Component {
     }
   }
 
-  reset() {
+  clearInput() {
     this.refs['Level'].clearText()
     this.refs['HP'].clearText()
     this.refs['Attack'].clearText()
@@ -82,16 +82,14 @@ export class StatInputFields extends React.Component {
       this.refs['Spc_Def'].clearText()
     }
 
-    this.state.level = ''
-    this.state.hp = ''
-    this.state.attack = ''
-    this.state.defense = ''
-    this.state.speed = ''
-    this.state.special = ''
-    this.state.special_attack = ''
-    this.state.special_defense = ''
-
-    this.props.onReset()
+    this.setState({ level: '', 
+                    hp: '',
+                    attack: '',
+                    defense: '',
+                    speed: '',
+                    special: '',
+                    special_attack: '',
+                    special_defense: '' })
   }
 
   selectNext(title) {
@@ -185,7 +183,7 @@ export class StatInputFields extends React.Component {
             style={styles.button}
             onPress={() => this.submitStats()}
             disabled={this.submitDisabled()}/>
-          <Button title='Reset' style={styles.button} onPress={() => this.reset()}/>
+          <Button title='Clear' style={styles.button} onPress={() => this.clearInput()}/>
         </View>
       </View>
     )
