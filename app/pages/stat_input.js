@@ -32,6 +32,10 @@ class StatInput extends React.Component {
     this.state = { text: null }
   }
 
+  componentWillUnmount() {
+    this.props.onStatsReset()
+  }
+
   getPokemon() {
     return this.props.pokemon[this.props.generation][this.props.pokemon_id]
   }
