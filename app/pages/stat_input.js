@@ -64,6 +64,8 @@ class StatInput extends React.Component {
       Alert.alert('Did not update DVs', error)
       return
     }
+
+    this.refs['inputs'].updateLevel(String(parseInt(this.props.input_stats.level) + 1))
     this.props.onValidUpdate(this.props.input_stats.level)
   }
 

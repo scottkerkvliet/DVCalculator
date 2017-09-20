@@ -39,6 +39,10 @@ export class InputField extends React.Component {
     this.refs['input'].focus()
   }
 
+  updateValue(value) {
+    this.refs['input'].setNativeProps({text: value})
+  }
+
   render() {
     return (
       <View style={styles.container}>

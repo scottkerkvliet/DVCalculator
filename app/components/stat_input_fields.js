@@ -92,6 +92,13 @@ export class StatInputFields extends React.Component {
                     special_defense: '' })
   }
 
+  updateLevel(level) {
+    this.clearInput()
+    this.refs['Level'].updateValue(level)
+    this.setState({level: level})
+    this.selectNext('Level')
+  }
+
   selectNext(title) {
     switch(title) {
       case 'Level':
