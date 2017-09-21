@@ -9,7 +9,7 @@ import GenerationSelect from './app/pages/generation_select'
 import PokemonSelect from './app/pages/pokemon_select'
 import StatInput from './app/pages/stat_input'
 
-import { DebouncedNavigator } from './app/common/debounced-navigation'
+import { debouncedNavigation } from './app/common/debounced-navigation'
 
 const Navigator = StackNavigator({
   GenerationSelect: { screen: GenerationSelect },
@@ -17,13 +17,11 @@ const Navigator = StackNavigator({
   StatInput: { screen: StatInput }
 })
 
-const debouncedNavigator = new DebouncedNavigator(Navigator)
-
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={configureStore()}>
-        <Navigator screenProps={{navigator: debouncedNavigator}}/>
+        <Navigator screenProps={{navigator: debouncedNavigation}}/>
       </Provider>
     );
   }

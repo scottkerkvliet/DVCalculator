@@ -26,7 +26,7 @@ class PokemonSelect extends React.Component {
 
   onPokemonSelected(number, name) {
     this.props.setSelectedPokemon(number)
-    this.props.navigation.navigate('StatInput', {title: name})
+    this.props.screenProps.navigator(this.props.navigation, 'StatInput', {title: name})
   }
 }
 

@@ -32,9 +32,7 @@ class GenerationSelect extends React.Component {
 
   inputGeneration(generation) {
     this.props.onGenSubmitted(generation)
-    //DebouncedNavigate(this.props.navigation, 'PokemonSelect')
-    //this.props.navigation.navigate('PokemonSelect')
-    this.props.screenProps.navigator.navigate('PokemonSelect')
+    this.props.screenProps.navigator(this.props.navigation, 'PokemonSelect')
   }
 
   render() {
