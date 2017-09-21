@@ -8,10 +8,16 @@ export class GenSelect extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={() => this.props.onGenSelect(1)}>
-          <Image style={styles.image} source={Images.generation1} />
+          <Text style={styles.text}>Red/Blue/Yellow</Text>
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={Images.generation1} />
+          </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => this.props.onGenSelect(2)}>
-          <Image style={styles.image} source={Images.generation2} />
+          <Text style={styles.text}>Gold/Silver/Crystal</Text>
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={Images.generation2} />
+          </View>
         </TouchableOpacity>
       </View>
     )
@@ -34,10 +40,24 @@ const styles = StyleSheet.create({
     marginRight: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'column'
+  },
+  imageContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     resizeMode: 'contain',
-    flex: 1
+    flex: 1,
+  },
+  text: {
+    backgroundColor: 'white',
+    paddingHorizontal: 5,
+    marginTop: 10,
+    fontSize: 24,
+    fontWeight: 'bold',
+    zIndex: 1
   }
 })
