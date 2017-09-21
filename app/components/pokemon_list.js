@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, FlatList, StyleSheet, TouchableHighlight, View } from 'react-native'
+import { Text, TextInput, FlatList, StyleSheet, TouchableHighlight, View } from 'react-native'
 
 const styles = StyleSheet.create({
   list_item_highlight: {
@@ -15,6 +15,10 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1
+  },
+  filter: {
+    padding: 10,
+    fontSize: 20
   }
 })
 
@@ -34,11 +38,32 @@ class PokemonListItem extends React.PureComponent {
 
 
 export default class PokemonList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {filterText: ''}
+  }
+
+  onChangeFilterText = (filterText) => {
+    this.setState({filterText});
+  }
+
   render() {
+    const filterRegex = new RegExp(String(this.state.filterText), 'i');
+    const filter = (item) => (
+      filterRegex.test(item.name) || filterRegex.test(item.number)
+    );
+    const filteredData = this.props.pokemon.filter(filter);
     return (
       <View style={styles.container}>
+        <TextInput
+          onChangeText={this.onChangeFilterText}
+          placeholder='Filter by name or number'
+          placeholderTextColor='grey'
+          selectTextOnFocus={true}
+          style={styles.filter}
+          />
         <FlatList
-          data={this.props.pokemon}
+          data={filteredData}
           keyExtractor={this.keyExtractor}
           renderItem={(item) => this.renderItem(item)} />
       </View>
