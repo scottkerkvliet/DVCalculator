@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { StyleSheet, Text, TextInput, View, Button, Alert } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Button, Alert, ScrollView } from 'react-native'
 
 import { input_stats_gen_1, input_stats_gen_2, reset_stats } from '../actions/input'
 import { update_dv_ranges, confirm_valid_input } from '../actions/calculation'
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   container: {  
     flexDirection: 'row',
     alignSelf: 'stretch',
+    justifyContent: 'center',
     marginBottom: 10,
   },
   text: {
@@ -76,7 +77,7 @@ class StatInput extends React.Component {
 
   render() {
     return (
-      <View>
+      <ScrollView>
         <DvCalculator
           input_stats={this.props.input_stats}
           base_stats={this.getPokemon()}
@@ -98,10 +99,10 @@ class StatInput extends React.Component {
           <DvDisplay statRange={this.props.dv_ranges.speedRange} title='Speed'/>
           <DvDisplay statRange={this.props.dv_ranges.specialRange} title='Special'/>
         </View>
-        <View>
+        <View style={styles.container}>
           <Button title='Reset' onPress={() => this.resetStats()}/>
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }

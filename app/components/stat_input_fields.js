@@ -5,25 +5,24 @@ import { InputField } from './input_field'
 
 const styles = StyleSheet.create({
   levelContainer: {
-    height: 80,
+    height: 70,
     width: 100,
     alignSelf: 'center'
   },
   statsContainer: {
-    height: 80,
+    height: 70,
     flexDirection: 'row',
     alignSelf: 'stretch',
   },
-  buttonContainer: {
+  buttonsContainer: {
+    marginHorizontal: 40,
+    marginVertical: 10,
     flexDirection: 'row',
     alignSelf: 'stretch',
-    alignItems: 'center'
+    justifyContent: 'space-around'
   },
   button: {
-    flex: 1,
-    alignSelf: 'stretch',
-    marginLeft: 20,
-    marginRight: 20
+    alignSelf: 'center',
   }
 })
 
@@ -78,8 +77,8 @@ export class StatInputFields extends React.Component {
     if (this.props.generation === 1) {
       this.refs['Special'].clearText()
     } else if (this.props.generation === 2) {
-      this.refs['Spc_Atk'].clearText()
-      this.refs['Spc_Def'].clearText()
+      this.refs['Spc Atk'].clearText()
+      this.refs['Spc Def'].clearText()
     }
 
     this.setState({ level: '', 
@@ -185,12 +184,12 @@ export class StatInputFields extends React.Component {
               title='Special' key='Special' ref='Special' />]
           }
         </View>
-        <View style={styles.buttonContainer}>
-          <Button title='Submit'
-            style={styles.button}
-            onPress={() => this.submitStats()}
-            disabled={this.submitDisabled()}/>
-          <Button title='Clear' style={styles.button} onPress={() => this.clearInput()}/>
+        <View style={styles.buttonsContainer}>
+            <Button title='Submit'
+              style={styles.button}
+              onPress={() => this.submitStats()}
+              disabled={this.submitDisabled()}/>
+            <Button title='Clear' style={styles.button} onPress={() => this.clearInput()}/>
         </View>
       </View>
     )
