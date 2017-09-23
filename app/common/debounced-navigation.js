@@ -8,7 +8,7 @@ export const debouncedNavigation = debounce(
       action,
     ),
   // Set the wait to a reasonable duration
-  1000,
+  500,
   {
     trailing: false,
     leading: true,
