@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 
@@ -17,8 +17,10 @@ const Navigator = StackNavigator({
   StatInput: { screen: StatInput }
 })
 
-StatusBar.setBarStyle('light-content')
-StatusBar.setBackgroundColor('red')
+if (Platform.OS == "android") {
+  StatusBar.setBarStyle('light-content')
+  StatusBar.setBackgroundColor('red')
+}
 
 export default class App extends React.Component {
   render() {
