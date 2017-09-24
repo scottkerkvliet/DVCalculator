@@ -1,5 +1,5 @@
 let default_state = {
-  previous_levels_submitted: [],
+  previous_stats_submitted: [],
   level: null,
   attack: null,
   defense: null,
@@ -8,6 +8,18 @@ let default_state = {
   special_defense: null,
   speed: null,
   hp: null
+}
+
+createStatsObject = (state) => {
+  let object = {}
+  object[state.level] = { attack: state.attack,
+                          defense: state.defense,
+                          speed: state.speed,
+                          special: state.special,
+                          special_attack: state.special_attack,
+                          special_defense: state.special_defense,
+                          hp: state.hp }
+  return object
 }
 
 export const input_stats = (state = default_state, action) => {
@@ -38,7 +50,7 @@ export const input_stats = (state = default_state, action) => {
     case 'CONFIRM_VALID_INPUT':
       return {
         ...default_state,
-        previous_levels_submitted: state.previous_levels_submitted.concat([action.level])
+        previous_stats_submitted: Object.assign({}, state.previous_stats_submitted, createStatsObject(state))
       }
     default:
       return state

@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { StyleSheet, Text, TextInput, View, Button, Alert, ScrollView } from 'react-native'
+import { Modal, StyleSheet, Text, TextInput, View, Button, Alert, ScrollView } from 'react-native'
 
 import { input_stats_gen_1, input_stats_gen_2, reset_stats } from '../actions/input'
 import { update_dv_ranges, confirm_valid_input } from '../actions/calculation'
 import { StatInputFields } from '../components/stat_input_fields'
 import { DvDisplay } from '../components/dv_display'
 import { DvCalculator } from '../components/dv_calculator'
+import { SubmittedStatsDisplay } from '../components/submitted_stats_display'
 
 const styles = StyleSheet.create({
   container: {  
@@ -21,6 +22,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'stretch',
     textAlign: 'center'
+  },
+  modal: {
+    marginHorizontal: 20,
+    marginVertical: 270,
+    backgroundColor: 'white',
+    borderColor: 'lightgrey',
+    borderWidth: 3,
+    borderRadius: 10,
+    padding: 10
   }
 })
 
@@ -31,7 +41,7 @@ class StatInput extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { text: null }
+    this.state = { text: null, modal: false }
   }
 
   componentWillUnmount() {
@@ -43,7 +53,7 @@ class StatInput extends React.Component {
   }
 
   submitStatsGen1(level, hp, attack, defense, speed, special) {
-    if (this.props.input_stats.previous_levels_submitted.includes(level)) {
+    if (this.props.input_stats.previous_stats_submitted.hasOwnProperty(level)) {
       Alert.alert('Did not update DVs', 'Level has already been submitted')
     } else {
       this.props.onGen1StatsSubmitted(level, hp, attack, defense, speed, special)
@@ -51,7 +61,7 @@ class StatInput extends React.Component {
   }
 
   submitStatsGen2(level, hp, attack, defense, special_attack, special_defense, speed) {
-    if (this.props.input_stats.previous_levels_submitted.includes(level)) {
+    if (this.props.input_stats.previous_stats_submitted.hasOwnProperty(level)) {
       Alert.alert('Did not update DVs', 'Level has already been submitted')
     } else {
       this.props.onGen2StatsSubmitted(level, hp, attack, defense, special_attack, special_defense, speed)
@@ -77,32 +87,51 @@ class StatInput extends React.Component {
 
   render() {
     return (
-      <ScrollView>
-        <DvCalculator
-          input_stats={this.props.input_stats}
-          base_stats={this.getPokemon()}
-          generation={this.props.generation}
-          onDvUpdate={(hpRange, attackRange, defenseRange, speedRange, specialRange) => 
-            this.submitDvRange(hpRange, attackRange, defenseRange, speedRange, specialRange)}/>
-        <StatInputFields
-          generation={this.props.generation}
-          onSubmitGen1={(level, hp, attack, defense, speed, special) =>
-            this.submitStatsGen1(level, hp, attack, defense, speed, special)}
-          onSubmitGen2={(level, hp, attack, defense, special_attack, special_defense, speed) =>
-            this.submitStatsGen2(level, hp, attack, defense, special_attack, special_defense, speed)}
-          ref='inputs'/>
-        <Text style={styles.text}>DVs</Text>
-        <View style={styles.container}>
-          <DvDisplay statRange={this.props.dv_ranges.hpRange} title='HP'/>
-          <DvDisplay statRange={this.props.dv_ranges.attackRange} title='Attack'/>
-          <DvDisplay statRange={this.props.dv_ranges.defenseRange} title='Defense'/>
-          <DvDisplay statRange={this.props.dv_ranges.speedRange} title='Speed'/>
-          <DvDisplay statRange={this.props.dv_ranges.specialRange} title='Special'/>
-        </View>
-        <View style={styles.container}>
-          <Button title='Reset' onPress={() => this.resetStats()}/>
-        </View>
-      </ScrollView>
+      <View>
+        <Modal
+          animationType='slide'
+          transparent={true}
+          visible={this.state.modal}
+          onRequestClose={ () => null }>
+          <View style={styles.modal}>
+            <SubmittedStatsDisplay
+              submitted_stats={this.props.input_stats.previous_stats_submitted}
+              generation={this.props.generation}/>
+            <View style={{marginTop:20}}>
+              <Button title='close' onPress={ () => this.setState({ modal: false }) }/>
+            </View>
+          </View>
+        </Modal>
+        <ScrollView>
+          <DvCalculator
+            input_stats={this.props.input_stats}
+            base_stats={this.getPokemon()}
+            generation={this.props.generation}
+            onDvUpdate={(hpRange, attackRange, defenseRange, speedRange, specialRange) => 
+              this.submitDvRange(hpRange, attackRange, defenseRange, speedRange, specialRange)}/>
+          <StatInputFields
+            generation={this.props.generation}
+            onSubmitGen1={(level, hp, attack, defense, speed, special) =>
+              this.submitStatsGen1(level, hp, attack, defense, speed, special)}
+            onSubmitGen2={(level, hp, attack, defense, special_attack, special_defense, speed) =>
+              this.submitStatsGen2(level, hp, attack, defense, special_attack, special_defense, speed)}
+            ref='inputs'/>
+          <Text style={styles.text}>DVs</Text>
+          <View style={styles.container}>
+            <DvDisplay statRange={this.props.dv_ranges.hpRange} title='HP'/>
+            <DvDisplay statRange={this.props.dv_ranges.attackRange} title='Attack'/>
+            <DvDisplay statRange={this.props.dv_ranges.defenseRange} title='Defense'/>
+            <DvDisplay statRange={this.props.dv_ranges.speedRange} title='Speed'/>
+            <DvDisplay statRange={this.props.dv_ranges.specialRange} title='Special'/>
+          </View>
+          <View style={styles.container}>
+            <Button title='Reset' onPress={() => this.resetStats()}/>
+          </View>
+          <View style={styles.container}>
+            <Button title='Open Modal' onPress={ () => this.setState({ modal: true }) }/>
+          </View>
+        </ScrollView>
+      </View>
     )
   }
 }
