@@ -72,7 +72,7 @@ class SubmittedStatsRow extends React.PureComponent {
 export class SubmittedStatsDisplay extends React.Component {
   render() {
     return (
-      <View>
+      <View style={{maxHeight: 210}}>
         { Object.keys(this.props.submitted_stats).length === 0 ?
           <Text>No levels submitted</Text> :
           <View style={{borderBottomWidth: 1, borderBottomColor: 'grey'}}>

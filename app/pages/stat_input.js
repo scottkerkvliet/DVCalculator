@@ -25,12 +25,12 @@ const styles = StyleSheet.create({
   },
   modal: {
     marginHorizontal: 20,
-    marginVertical: 270,
+    marginTop: 200,
     backgroundColor: 'white',
     borderColor: 'lightgrey',
     borderWidth: 3,
     borderRadius: 10,
-    padding: 10
+    padding: 10,
   }
 })
 
