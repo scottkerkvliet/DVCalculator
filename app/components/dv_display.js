@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
 export class DvDisplay extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {dvFound: false, text: this.getDvString()}
+    this.state = {dvFound: props.statRange && props.statRange[0] === props.statRange[1],
+      text: this.getDvString(props.statRange)}
   }
 
   componentWillReceiveProps(nextProps) {

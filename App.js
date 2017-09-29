@@ -8,10 +8,14 @@ import configureStore from './app/store/configure_store'
 import GenerationSelect from './app/pages/generation_select'
 import PokemonSelect from './app/pages/pokemon_select'
 import StatInput from './app/pages/stat_input'
+import MainMenu from './app/pages/main_menu'
+import SavedPokemonSelect from './app/pages/saved_pokemon_select'
 
 import { debouncedNavigation } from './app/common/debounced-navigation'
 
 const Navigator = StackNavigator({
+  MainMenu: { screen: MainMenu },
+  SavedPokemonSelect: { screen: SavedPokemonSelect },
   GenerationSelect: { screen: GenerationSelect },
   PokemonSelect: { screen: PokemonSelect },
   StatInput: { screen: StatInput }

@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Modal, StyleSheet, Text, TextInput, View, Button, Alert, ScrollView } from 'react-native'
 
-import { input_stats_gen_1, input_stats_gen_2, reset_stats } from '../actions/input'
+import { input_stats_gen_1, input_stats_gen_2, reset_stats, save_pokemon } from '../actions/input'
 import { update_dv_ranges, confirm_valid_input } from '../actions/calculation'
 import { StatInputFields } from '../components/stat_input_fields'
-import { DvDisplay } from '../components/dv_display'
+import { DvContainer } from '../components/dv_container'
 import { DvCalculator } from '../components/dv_calculator'
 import { SubmittedStatsDisplay } from '../components/submitted_stats_display'
 
@@ -15,6 +15,17 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     marginBottom: 10,
+  },
+  buttonsContainer: {
+    marginBottom: 10,
+    marginTop: 50,
+    marginHorizontal: 10,
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    justifyContent: 'space-around'
+  },
+  button: {
+    alignSelf: 'center',
   },
   text: {
     margin: 10,
@@ -41,7 +52,7 @@ class StatInput extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { text: null, modal: false }
+    this.state = { modal: false }
   }
 
   componentWillUnmount() {
@@ -85,6 +96,19 @@ class StatInput extends React.Component {
     this.props.onStatsReset()
   }
 
+  savePokemon() {
+    pokemon = this.getPokemon()
+    this.props.onSave(pokemon.name,
+      pokemon.number,
+      this.props.dv_ranges,
+      this.props.input_stats.previous_stats_submitted)
+  }
+
+  saveDisabled() {
+    return !this.props.input_stats.previous_stats_submitted ||
+      this.props.input_stats.previous_stats_submitted.length === 0
+  }
+
   render() {
     return (
       <View>
@@ -117,18 +141,13 @@ class StatInput extends React.Component {
               this.submitStatsGen2(level, hp, attack, defense, special_attack, special_defense, speed)}
             ref='inputs'/>
           <Text style={styles.text}>DVs</Text>
-          <View style={styles.container}>
-            <DvDisplay statRange={this.props.dv_ranges.hpRange} title='HP'/>
-            <DvDisplay statRange={this.props.dv_ranges.attackRange} title='Attack'/>
-            <DvDisplay statRange={this.props.dv_ranges.defenseRange} title='Defense'/>
-            <DvDisplay statRange={this.props.dv_ranges.speedRange} title='Speed'/>
-            <DvDisplay statRange={this.props.dv_ranges.specialRange} title='Special'/>
-          </View>
+          <DvContainer dv_ranges={this.props.dv_ranges}/>
           <View style={styles.container}>
             <Button title='Reset' onPress={() => this.resetStats()}/>
           </View>
-          <View style={styles.container}>
-            <Button title='Open Modal' onPress={ () => this.setState({ modal: true }) }/>
+          <View style={styles.buttonsContainer}>
+            <Button style={styles.button} title='View Submitted Stats' onPress={ () => this.setState({ modal: true }) }/>
+            <Button style={styles.button} title='Save' disabled={this.saveDisabled()} onPress={ () => this.savePokemon()}/>
           </View>
         </ScrollView>
       </View>
@@ -160,6 +179,9 @@ const actions = (dispatch) => {
     },
     onValidUpdate: (level) => {
       dispatch(confirm_valid_input(level))
+    },
+    onSave: (name, number, dvRanges, submittedStats) => {
+      dispatch(save_pokemon(name, number, dvRanges, submittedStats))
     }
   }
 }

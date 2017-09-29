@@ -1,3 +1,5 @@
+import { AsyncStorage, Alert } from 'react-native'
+
 export const input_stats_gen_1 = (level, hp, speed, attack, defense, special) => {
   return {
     type: 'SET_INPUT_STATS_GEN_1',
@@ -40,5 +42,22 @@ export const input_pokemon_id = (id) => {
   return {
     type: 'SET_POKEMON_ID',
     pokemon_id: id
+  }
+}
+
+export const save_pokemon = (name, number, dvRanges, submittedStats) => {
+  return {
+    type: 'SAVE_POKEMON',
+    dvs: { ...dvRanges },
+    name: name,
+    number: number,
+    submittedStats: { ...submittedStats }
+  }
+}
+
+export const delete_pokemon = (id) => {
+  return {
+    type: 'DELETE_POKEMON',
+    id: id
   }
 }

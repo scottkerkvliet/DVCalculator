@@ -74,7 +74,7 @@ export class SubmittedStatsDisplay extends React.Component {
     return (
       <View style={{maxHeight: 210}}>
         { Object.keys(this.props.submitted_stats).length === 0 ?
-          <Text>No levels submitted</Text> :
+          <Text style={{alignSelf: 'stretch', textAlign: 'center'}}>No levels submitted</Text> :
           <View style={{borderBottomWidth: 1, borderBottomColor: 'grey'}}>
             <SubmittedStatsRow
               key='headers'
