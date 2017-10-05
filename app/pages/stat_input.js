@@ -134,6 +134,7 @@ class StatInput extends React.Component {
             onDvUpdate={(hpRange, attackRange, defenseRange, speedRange, specialRange) => 
               this.submitDvRange(hpRange, attackRange, defenseRange, speedRange, specialRange)}/>
           <StatInputFields
+            base_stats={this.getPokemon()}
             generation={this.props.generation}
             onSubmitGen1={(level, hp, attack, defense, speed, special) =>
               this.submitStatsGen1(level, hp, attack, defense, speed, special)}

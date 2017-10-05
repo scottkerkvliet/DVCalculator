@@ -1,13 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Button, Modal } from 'react-native'
 
 import { InputField } from './input_field'
+import { StatRanges } from './stat_ranges'
 
 const styles = StyleSheet.create({
   levelContainer: {
-    height: 70,
-    width: 100,
-    alignSelf: 'center'
+    width: '70%',
+    marginVertical: 10,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    justifyContent: 'space-around'
   },
   statsContainer: {
     height: 70,
@@ -23,13 +26,31 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'center',
+  },
+  levelView: {
+    flex: 1
+  },
+  levelButtonView: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
+  modal: {
+    marginHorizontal: 20,
+    marginTop: 100,
+    backgroundColor: 'white',
+    borderColor: 'lightgrey',
+    borderWidth: 3,
+    borderRadius: 10,
+    padding: 10,
   }
 })
 
 export class StatInputFields extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {  level: '',
+    this.state = {  modal: false,
+                    level: '',
                     hp: '',
                     attack: '',
                     defense: '',
@@ -66,6 +87,10 @@ export class StatInputFields extends React.Component {
                 this.state.special_attack.length &&
                 this.state.special_defense.length)
     }
+  }
+
+  statRangeDisabled() {
+    return this.state.level.length === 0
   }
 
   clearInput() {
@@ -137,12 +162,35 @@ export class StatInputFields extends React.Component {
   render() {
     return (
       <View>
+        <Modal
+          animationType='slide'
+          transparent={true}
+          visible={this.state.modal}
+          onRequestClose={ () => null }>
+          <View style={styles.modal}>
+            <StatRanges
+              level={this.state.level}
+              base_stats={this.props.base_stats}
+              generation={this.props.generation}/>
+            <View style={{marginTop:20}}>
+              <Button title='close' onPress={ () => this.setState({ modal: false }) }/>
+            </View>
+          </View>
+        </Modal>
         <View style={styles.levelContainer}>
-          <InputField
-            onChange={(value) => this.setState({ level: value })}
-            onSubmit={(title) => this.selectNext(title)}
-            title='Level'
-            ref='Level' />
+          <View style={styles.levelView}>
+            <InputField
+              onChange={(value) => this.setState({ level: value })}
+              onSubmit={(title) => this.selectNext(title)}
+              title='Level'
+              ref='Level' />
+          </View>
+          <View style={styles.levelButtonView}>
+            <Button title='Stats For Level'
+              style={styles.button}
+              onPress={() => this.setState({ modal: true })}
+              disabled={this.statRangeDisabled()}/>
+          </View>
         </View>
         <View style={styles.statsContainer}>
           <InputField
